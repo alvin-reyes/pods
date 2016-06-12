@@ -1,0 +1,18 @@
+
+
+<div class="modal-header" ng-init="getAllNurse()">
+        <h3 class="modal-title">Switch Nurse</h3>
+    </div>
+    <div class="modal-body">
+    
+        <label>Select RN</label>
+        <select class="form-control" name="rnSelect" ng-model="rnPlacement.selected" ng-change="selectNurse()">
+          <option ng-repeat="o in rnPlacement.options" value="{{o.id}}">{{o.name}}</option>
+        </select>
+        
+        </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-outline btn-default" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-outline btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>

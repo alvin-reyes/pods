@@ -1,0 +1,18 @@
+
+
+<div class="modal-header" ng-init="getTeamsOnly()">
+        <h3 class="modal-title">Re-assign</h3>
+    </div>
+    <div class="modal-body">
+    
+        <label>Select POD</label>
+        <select class="form-control" name="rnSelect" ng-model="selectedTeamId">
+          <option ng-repeat="a in teamsOnly" value="{{a.id}}">{{a.name}}</option>
+        </select>
+        
+        </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-outline btn-default" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-outline btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>

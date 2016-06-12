@@ -1,0 +1,107 @@
+<script type="application/javascript">
+//
+//$(document).ready(function() {
+//    $('#docPatId').DataTable( {
+//        dom: 'frtip'
+//    } );
+//    
+//    $('#podRnId').DataTable( {
+//        dom: 'frtip'
+//    } );
+//} );
+    
+    
+</script>
+<div id="panel-wrapper" style="padding:25px;">
+
+        <label>Select a report</label>
+
+    <div class="panel panel-primary">
+        
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                        <input type="text" ng-model="selectedReport" uib-typeahead="report.name for report in reports() | filter:$viewValue | limitTo:8" class="form-control" typeahead-editable="false" typeahead-on-select="setReport($item)">
+                </div>
+                <div class="col-md-2">
+                    <div class="btn btn-default pull-left glyphicon glyphicon-download" ng-click="generateReport()"></div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    <div ng-show="docPat.length > 0">
+        <div class="btn btn-default" style="margin:10px 10px 10px 0px;" ng-click="print('docPatId')">Print</div>
+        <table id="docPatId" class="display nowrap table table-bordered table-hover" border="1" cellpadding="3" >
+                <thead>
+                    <tr>
+                        <th>Doctor</th>
+                        <th>POD</th>
+                        <th>Shift Starts</th>
+                        <th>Shift Ends</th>
+                        <th>Patients</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="doc in docPat">
+                        <td ng-cloak >{{doc.doc.name}}</td>
+                        <td ng-cloak >{{doc.pod.name}}</td>
+                        <td ng-cloak >{{doc.doc.shift_start}}</td>
+                        <td ng-cloak >{{doc.doc.shift_end}}</td>
+                        <td ng-cloak >{{doc.count}}</td>
+                    </tr>
+                    <!--
+                    <tr><td colspan="5">
+                        <div ng-show="docPatTotal > 0">
+                            <b>TOTAL:</b> {{docPatTotal}}
+                        </div>
+                        </td>
+                    </tr>
+                    -->
+                </tbody>
+                            <tfoot>
+                                  <tr><td colspan="5">
+                        <div ng-show="docPatTotal > 0">
+                            <b>TOTAL:</b> {{docPatTotal}}
+                        </div>
+                        </td>
+                    </tr>
+                </tfoot>
+
+        </table>
+        </div>
+        <div ng-show="podRn.length > 0">
+         <div class="btn btn-default" style="margin:10px 10px 10px 0px" ng-click="print('podRnId')">Print</div>
+        <table id="podRnId" class="display nowrap table table-bordered table-hover"  border="1" cellpadding="3" >
+                <thead>
+                    <tr>
+                        <th>POD</th>
+                        <th>Nurse</th>
+                        <th>Shift Starts</th>
+                        <th>Shift Ends</th>
+                        <th>Patients</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="rn in podRn">
+                        <td ng-cloak >{{rn.pod.name}}</td>
+                        <td ng-cloak >{{rn.rn.name}}</td>
+                        <td ng-cloak >{{rn.rn.shift_start}}</td>
+                        <td ng-cloak >{{rn.rn.shift_end}}</td>
+                        <td ng-cloak >{{rn.count}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                           <tr>
+                        <td colspan="5"><div ng-show="podRnTotal > 0">
+                            <b>TOTAL:</b>{{podRnTotal}}
+                        </div>
+                    </td>
+                    </tr>
+                </tfoot>
+        </table>
+
+</div>
+</div>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Alvin Reyes">
+        <title>PODLOGIX</title>
+        
+        
+        <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet" type="text/css">
+        <link href="bower_components/angular-growl-v2/build/angular-growl.css" rel="stylesheet">
+        
+        <link href="../styles/sb-admin-2.css" rel="stylesheet">
+        <link href="../styles/main.css" rel="stylesheet">
+        
+
+        
+    
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body ng-app="erLoadUi">
+        
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0px;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <a class="navbar-brand" href="index.html">PodLogix</a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#/">
+                        <i class="fa fa-home fa-fw"></i>  
+                    </a>
+                </li>
+<!--
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#/memberregistration">
+                        <i class="fa fa-user fa-fw"></i>  
+                    </a>
+                </li>
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#/teamregistration">
+                        <i class="fa fa-pencil fa-fw"></i>  
+                    </a>
+                </li>
+-->
+                                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#/report">
+                        <i class="fa fa-user fa-file-text"></i>  
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div ng-controller="growlCtrl">
+        <div growl></div>
+        </div>
+        <div id="wrapper" ng-view>
+        </div>
+
+        <!-- /#wrapper -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script src="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+        <script src="bower_components/bootstrap-toggle/js/bootstrap-toggle.js"></script>
+        
+        
+        <!-- build:js(.) scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-aria/angular-aria.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
+        <script src="bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.2.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+        <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+        <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="bower_components/angular-growl-v2/build/angular-growl.js"></script>
+        <script src="../scripts/theme_scripts/date.js"></script>
+        <script src="../scripts/theme_scripts/jspdf.min.js"></script>
+        <script src="../scripts/theme_scripts/pdfkit.js"></script>
+        <script src="../scripts/theme_scripts/blob-stream.js"></script>
+        
+        <script src="../scripts/app.js"></script>
+        <script src="../scripts/controllers/erloadcontroller.js"></script>
+        <script src="../scripts/controllers/erreportcontroller.js"></script>
+        <script src="../scripts/controllers/memberregistrationctrl.js"></script>
+        <script src="../scripts/controllers/teamregistrationctrl.js"></script>
+        <script src="../scripts/controllers/modalctrl.js"></script>
+
+        <!--Services -->
+        <script src="../scripts/services/dataservice.js"></script>
+        <script src="../scripts/services/notificationservice.js"></script>
+        <script src="../scripts/services/patientnurseassignmentservice.js"></script>
+        <script src="../scripts/services/erloadautostepsservice.js"></script>
+        <script src="../scripts/services/shiftservice.js"></script>
+        <script src="../scripts/services/teampodservice.js"></script>
+        <script src="../scripts/services/utilityservice.js"></script>
+
+        <!--Directives -->
+        <script src="../scripts/directives/activeteamdirective.js"></script>
+        <script src="../scripts/directives/inactiveteamdirective.js"></script>
+        <script src="../scripts/directives/shiftdirective.js"></script>
+        
+        
+        
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+        <script>
+            !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+            (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+            r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+            }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-XXXXX-X');
+            ga('send', 'pageview');
+        </script>
+    </body>
+</html>

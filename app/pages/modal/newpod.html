@@ -1,0 +1,29 @@
+
+
+<div class="modal-header" ng-init="getTeamsOnly()">
+        <h3 class="modal-title">New POD</h3>
+    </div>
+    <div class="modal-body">
+        <label>POD Name</label>
+        <input type="text" class="form-control" ng-model="podName"/>
+        <label>Doctor</label>
+               
+        <input type="text" ng-model="selectedDoctor" uib-typeahead="doctor.name for doctor in doctors() | filter:$viewValue | limitTo:8" class="form-control" typeahead-editable="false"
+       typeahead-on-select="setDoctor($item)">
+        
+        <label>Select RN</label>
+
+       <input type="text" ng-model="selectedNurse" uib-typeahead="nurse.name for nurse in rns() |   filter:$viewValue | limitTo:25" class="form-control" typeahead-on-select="setNurse($item)">
+        </div>
+        
+        <div class="container">
+            <div class="alert alert-success" ng-repeat="a in listSelectNurse">
+              <a href="#" class="close" ng-click="removeNurse(a)" data-dismiss="alert" aria-label="close">&times;</a>
+                {{a.name}}
+            </div>
+        </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-outline btn-default" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-outline btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>

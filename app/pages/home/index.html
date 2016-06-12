@@ -1,0 +1,102 @@
+
+        <!-- /.navbar-top-links 
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+           <div class="panel-body">
+                    
+                </div>
+            </div>
+        </div>
+        -->
+    
+        <div id="panel-wrapper" style="padding:0px 25px 0px 25px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-header1" style="padding:10px 0px 0px 0px;">
+                            <!--<h1 class="page-header">Patient Registration</h1>-->
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" required="true" placeholder="Enter Patient Name..." ng-model="patientNameInput" ng-keydown="assignTeamNurseEnter($event)" required>
+                                <span class="input-group-btn">
+                                <!--<button class="btn btn-default" type="button" ng-click="assignTeamNurse()">
+                                    <i class="fa fa-plus-circle"></i>
+                               
+                                </button>
+                                -->
+                                    <button class="btn btn-default" type="button" ng-click="manualPatientAssignment()">
+                                    <i class="fa fa-plus-circle"></i>
+                                </button>
+                            </span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body" style="text-align:center;" >
+                <button type="button" class="btn btn-default" ng-click="step1()">5:30AM</button>
+                <button type="button" class="btn btn-default" ng-click="step2()">7:00AM</button>
+                <button type="button" class="btn btn-default" ng-click="step3()">8:00AM</button>
+                <button type="button" class="btn btn-default" ng-click="step4()">9:00AM</button>
+                <button type="button" class="btn btn-default" ng-click="step5()">11:00AM</button>
+                <button type="button" class="btn btn-default" ng-click="step6()">3:00PM</button>
+                <button type="button" class="btn btn-default" ng-click="step7()">4:00PM</button>
+                <button type="button" class="btn btn-default" ng-click="step8()">6:30PM</button>
+                <button type="button" class="btn btn-default" ng-click="step9()">7:00PM</button>
+                <button type="button" class="btn btn-default" ng-click="step10()">8:00PM</button>
+                <button type="button" class="btn btn-default" ng-click="step11()">9:30PM</button>
+                <button type="button" class="btn btn-default" ng-click="step12()">10:45PM</button>
+                <button type="button" class="btn btn-default" ng-click="step13()">11:00PM</button>
+                <button type="button" class="btn btn-default" ng-click="step14()">2:00AM</button>
+                <button type="button" class="btn btn-default" ng-click="step15()">3:00AM</button>
+                <button type="button" class="btn btn-default" ng-click="step16()">4:00AM</button>
+                
+            </div>
+      
+                    <div class="container-fluid">
+                        <div class="row">
+                            <shiftdirective er-teams="teams"></shiftdirective>
+                        </div>
+                    </div>
+                            <!--
+                            <activeteamdirective er-team="currentActiveShifts"></activeteamdirective>
+                            <inactiveteamdirective er-team="inActiveShifts"></inactiveteamdirective>
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="patientDataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Patient Name</th>
+                                            <th>Team Assignment</th>
+                                            <th>Nurse Assigned</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="patient in patients">
+                                                <td>{{patient.name}}
+                                                </td>
+                                                <td>{{patient.TeamA}}
+                                                </td>
+                                                <td>{{patient.NurseA}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-default">Details</button>
+                                                    <button class="btn btn-default">Release to</button>
+                                                    <button class="btn btn-default">Discharge</button>
+                                                </td>
+	                                       </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            -->
+                
+            </div>
+        
+
+<!-- JS -->
+    <script>
+     $(document).ready(function() {
+            $('#patientDataTable').DataTable({
+                    responsive: true
+            });
+
+    });
+    </script>
+
