@@ -7,7 +7,6 @@ angular.module('erLoadUi')
     this.step1Logic = function() {
         
         notificationService.setSuccessNotification("5:30AM Shift has started");
-        
         var time = "5:30";
         
         var doctrosOnShift = shiftService.getDoctorsOnShift(time);
@@ -54,7 +53,7 @@ angular.module('erLoadUi')
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
         
-        dataService.teams[1].doctor = dataService.doctors[2];
+        dataService.teams[2].doctor = dataService.doctors[2];
     }
     
     //  9:00AM
@@ -64,7 +63,7 @@ angular.module('erLoadUi')
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
         
-        dataService.teams[2].doctor = dataService.doctors[3];
+        dataService.teams[1].doctor = dataService.doctors[3];
         
     }
     
@@ -109,7 +108,7 @@ angular.module('erLoadUi')
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
         shiftService.assignNewNurseToPods(rnsOnShift,pods,1);
-        dataService.teams[2].doctor = dataService.doctors[6];
+        dataService.teams[3].doctor = dataService.doctors[6];
 
     }
     
@@ -120,7 +119,7 @@ angular.module('erLoadUi')
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
         notificationService.setSuccessNotification("6:30PM Shift has started");
-        dataService.teams[1].doctor = dataService.doctors[7];    
+        dataService.teams[2].doctor = dataService.doctors[7];    
     }
 
     //  7:00PM  

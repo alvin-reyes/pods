@@ -11,8 +11,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'angular-growl',
-    'datatables'
+    'angular-growl'
   ])
   .config(function ($routeProvider) {
     $routeProvider

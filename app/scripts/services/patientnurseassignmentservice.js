@@ -114,7 +114,7 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
         var patient;
         
         //  Before we assign, let's get the active POD with the least number of patients.
-        var assignedPod = teamPodService.determinePatientAssignmentToDoctor(teams);
+        var assignedPod = teamPodService.determinePatientAssignmentToPod(teams);
         var nursePod = this.determinePatientAssignedPodtoNurse(assignedPod.pod);
         //console.log(teamPodService.numberOfPatientsInPod(teams[0]));
         //  Team Assignment Algorithm Check.
