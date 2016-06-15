@@ -5,6 +5,36 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
     this.lastPodAssignment = '';
 
     
+    this.reAssignPatientsToOnShiftNurses = function(activeNurses,inActiveNurses) {
+        
+        var newActiveArr = new Array(activeNurses)[0];
+        var inActiveNursesDc = new DataCollection(inActiveNurses);
+        
+   
+        //  Loop through the inactive ones and replace them with active.
+        for(var i=0;i<dataService.teams.length;i++) {
+            for(var j=0;j<dataService.teams[i].members.length;j++) {
+                var assignedP = dataService.teams[i].members[j].assigned_patient;
+                if(inActiveNursesDc.query().filter({id:dataService.teams[i].members[j].id}).count() > 0) {
+                    dataService.teams[i].members[j] = newActiveArr[0];
+                    dataService.teams[i].members[j].assigned_patient = assignedP;
+                    
+                    dataService.dataForReport.unshift({
+                        'pod':dataService.teams[i],
+                        'doctor':dataService.teams[i].doctor,
+                        'rn':newActiveArr[0],
+                        'patient':assignedP});
+                    
+                    newActiveArr.splice(0,1);
+                    
+                }
+            }
+        }
+    
+        return activeNurses;
+        
+    }
+    
     this.reAssignNursesPatientToNurses = function(teams, activeNurses) {
         var x = 0;
         for(var i=0;i<teams.length;i++) {

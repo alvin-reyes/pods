@@ -103,25 +103,62 @@ angular.module('erLoadUi')
         } 
     }
     
-    this.assignNurseToPods = function(rns,pods,limitperpod) {
-//        for(var i=0;i<pods.length;i++) {
-//            pods[i].members = [];
-//        }
-        var x = 0;
-        for(var i=0;i<pods.length;i++) {
-            for(var j=0;j<limitperpod;j++) {
-                if(pods[i].members[j] == undefined || (pods[i].members[j].id != rns[j+x].id)) {
-                    if(!teamPodService.checkIfNurseIfAssignedToPod(rns[j+x])) {
-                        rns[j+x].member_status = 'active';
-                        pods[i].members.push(rns[j+x]);
+    this.assignNurseToPods = function(rns,pods,numOfIns,limit) {
+        
+        var rnsC = new Array(rns)[0];
+        var rnsDC = new DataCollection(rns);
+        var rnsBalance = new Array();
+        
+        for(var a=0;a<pods.length;a++) {
+            for(var b=0;b<numOfIns;b++) {
+                if(pods[a].members.length < limit) {
+                    if(rnsC[0] != null && !teamPodService.checkIfNurseIfAssignedToPods(rnsC[0],pods)) 
+                    {
+                        //rns[i].member_status = 'active';
+                        pods[a].members.push(rnsC[0]);
                     }
+                    rnsC.splice(0,1);
                 }
             }
-            x = j + x;
         }
         
-
+        //  Balance out the pods based on the limit
+//        for(var a=0;a<pods.length;a++) {
+//            if(pods[a].members.length > limit) {
+//                for(var b=0;b<(pods[a].members.length - limit);b++) {
+//                    rnsBalance.push(pods[a].members[b]);
+//                }
+//            }
+//        }
+//        
+//        //  Balancer
+//        for(var a=0;a<pods.length;a++) {
+//            if(pods[a].members.length < limit) {
+//                for(var b=0;b<(pods[a].members.length - limit);b++) {
+//                    rnsBalance.push(pods[a].members[b]);
+//                }
+//            }
+//        }
+        
     }
+
+//    this.assignNurseToPods = function(rns,pods,limitperpod) {
+//
+//        var x = 0;
+//        for(var i=0;i<pods.length;i++) {
+//            for(var j=0;j<limitperpod;j++) {
+//                if(pods[i].members[j] == undefined || (pods[i].members[j].id != rns[j+x].id)) {
+//                    if(!teamPodService.checkIfNurseIfAssignedToPod(rns[j+x])) {
+//                        rns[j+x].member_status = 'active';
+//                        pods[i].members.push(rns[j+x]);
+//                    }
+//                }
+//            }
+//            x = j + x;
+//        }
+//        
+//
+//    }
     
     this.replaceNursesOnPods = function(rns,pods) {
         

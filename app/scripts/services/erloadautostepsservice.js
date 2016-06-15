@@ -19,10 +19,11 @@ angular.module('erLoadUi')
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
         
+        var activeRns = patientNurseAssignmentService.reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         //  Re-assign the patient from the out of shifts to the on shifts.
-        var activeRns = patientNurseAssignmentService.reAssignNursesPatientToNurses(pods,rnsOnShift);
+        //var activeRns = patientNurseAssignmentService.reAssignNursesPatientToNurses(pods,rnsOnShift);
         
-        shiftService.assignNurseToPods(activeRns,pods,2);
+        shiftService.assignNurseToPods(activeRns,pods,2,2);
         
         dataService.teams[0].doctor = dataService.doctors[0];
         dataService.teams[1].doctor = dataService.doctors[0];
@@ -44,8 +45,10 @@ angular.module('erLoadUi')
                     dataService.teams[2],
                     dataService.teams[3]];
         
-        var activeRns = patientNurseAssignmentService.reAssignNursesPatientToNurses(pods,rnsOnShift);
-        shiftService.assignNurseToPods(activeRns,pods,2);
+        //var activeRns = patientNurseAssignmentService.reAssignNursesPatientToNurses(pods,rnsOnShift);
+        var activeRns = patientNurseAssignmentService.reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
+        
+        shiftService.assignNurseToPods(activeRns,pods,2,2);
     }
 
     //  8:00AM 
@@ -54,7 +57,8 @@ angular.module('erLoadUi')
         var time = "8:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         dataService.teams[2].doctor = dataService.doctors[2];
     }
     
@@ -64,7 +68,8 @@ angular.module('erLoadUi')
         var time = "9:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         dataService.teams[1].doctor = dataService.doctors[3];
         
     }
@@ -79,8 +84,9 @@ angular.module('erLoadUi')
         var pods = [dataService.teams[4]];
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        
-        shiftService.assignNurseToPods(rnsOnShift,pods,2);
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
+        shiftService.assignNurseToPods(activeRns,pods,2,2);
     }
     
     //  3:00PM
@@ -93,13 +99,17 @@ angular.module('erLoadUi')
             dataService.teams[1],
             dataService.teams[2],
             dataService.teams[4]];
+        
         dataService.teams[0].doctor = dataService.doctors[5];
         
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
         
-        //shiftService.assignNurseToPods(rnsOnShift,pods,2);
-        shiftService.assignNewNurseToPods(rnsOnShift,pods,1);
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
+        
+        //  Assigned new RNS on shift to pods.
+        shiftService.assignNurseToPods(activeRns,pods,1,3);
     }
     
     //  4:00PM
@@ -109,18 +119,23 @@ angular.module('erLoadUi')
         var pods = [dataService.teams[3]];
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        shiftService.assignNewNurseToPods(rnsOnShift,pods,1);
+        
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         dataService.teams[3].doctor = dataService.doctors[6];
 
     }
     
     //  6:30PM
     this.step8Logic = function() {
+        notificationService.setSuccessNotification("6:30PM Shift has started");
         //  POD 1 Doctor 6
         var time = "18:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        notificationService.setSuccessNotification("6:30PM Shift has started");
+        
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         dataService.teams[2].doctor = dataService.doctors[7];    
     }
 
@@ -138,14 +153,9 @@ angular.module('erLoadUi')
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
         
-        console.log(rnsOnShift);
-        console.log(rnsOutOfShift);
-        console.log(pods);
-        
         var activeRns = patientNurseAssignmentService.
-                    reAssignNursesPatientToNurses(pods,rnsOnShift);
-        
-        shiftService.assignNurseToPods(activeRns,pods,3);
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
+        shiftService.assignNurseToPods(activeRns,pods,3,3);
     }
     
     //  8:00PM
@@ -154,7 +164,8 @@ angular.module('erLoadUi')
         var time = "20:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         dataService.teams[1].doctor = dataService.doctors[8];
     }
     
@@ -164,7 +175,9 @@ angular.module('erLoadUi')
         var time = "21:30";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
+
         dataService.teams[3].doctor = dataService.doctors[9];   
         dataService.teams[4].doctor = dataService.doctors[10];
     }
@@ -182,10 +195,10 @@ angular.module('erLoadUi')
              dataService.teams[4]];
         
         var activeRns = patientNurseAssignmentService.
-                    reAssignNursesPatientToNurses(pods,rnsOnShift);
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         
         patientNurseAssignmentService.disablePod(dataService.teams[3]);
-        shiftService.assignNurseToPods(activeRns,pods,3);
+        shiftService.assignNurseToPods(activeRns,pods,3,3);
         dataService.teams[0].doctor = dataService.doctors[9];
     }
     
@@ -195,6 +208,8 @@ angular.module('erLoadUi')
         var time = "23:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         
         teamPodService.disablePod(dataService.teams[4]);
     }
@@ -205,7 +220,9 @@ angular.module('erLoadUi')
         var time = "2:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
+
         teamPodService.disablePod(dataService.teams[4]);
     }
      
@@ -214,22 +231,16 @@ angular.module('erLoadUi')
         var time = "3:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-//        var pods = [
-//            {'teams': dataService.teams[0],'num':3},
-//            {'teams': dataService.teams[1],'num':2},
-//            {'teams': dataService.teams[4],'num':3}
-//        ];
         
         var pods = [dataService.teams[4]];
         //shiftService.assignNewNursesToPodsN(rnsOnShift,pods);
         var activeRns = patientNurseAssignmentService.
-                    reAssignNursesPatientToNurses(pods,rnsOnShift);
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
 
-        shiftService.assignNewNurseToPods(activeRns,pods,3);
+        shiftService.assignNurseToPods(activeRns,pods,3,3);
         
         teamPodService.disablePod(dataService.teams[2]);
         teamPodService.disablePod(dataService.teams[3]);
-        
         teamPodService.enablePod(dataService.teams[4]);
     }
     
@@ -238,7 +249,9 @@ angular.module('erLoadUi')
         var time = "4:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        
+        var activeRns = patientNurseAssignmentService.
+        reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
+
         dataService.teams[0].doctor = dataService.doctors[9];
     }
     

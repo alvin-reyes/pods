@@ -30,6 +30,19 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
         
     }
     
+    this.checkIfNurseIfAssignedToPods = function(nurse,pods) {
+        for(var i=0;i<pods.length;i++) {
+            if(pods[i].team_status == 'active') {
+                for(var j=0;j<pods[i].members.length;j++) {
+                    if(pods[i].members[j].id == nurse.id) {
+                        return true;
+                    }
+                }
+            }  
+        }
+        return false;
+    }
+    
     this.checkIfNurseIfAssignedToPod = function(nurse) {
         for(var i=0;i<dataService.teams.length;i++) {
             if(dataService.teams[i].team_status == 'active') {
