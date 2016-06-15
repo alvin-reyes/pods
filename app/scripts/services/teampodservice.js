@@ -5,6 +5,34 @@
 angular.module('erLoadUi').service('teamPodService', function(dataService){
 
     this.disablePod = function(team) {
+        
+        var memberArr = new Array();
+        var memberArrDC = new DataCollection(memberArr);
+        var teamsActive = new DataCollection(dataService.teams);
+        var div = 0;
+        
+        for(var i=0;i<team.members.length;i++) {
+            memberArr.push(team.members[i]);
+        }
+            
+        div =memberArr.length/teamsActive.query().filter({team_status:'active'}).count();
+        console.log(Math.ceil(div));
+        
+        //  assign each members to currently active pods.
+        for(var i=0;i<dataService.teams.length;i++) {
+            if(dataService.teams[i].team_status == 'active') {
+                var j = 0;
+                while(j<div) {
+                    if(memberArr[0] != null) {
+                        dataService.teams[i].members.push(memberArr[0]);
+                        memberArr.splice(0,1);
+                        
+                    }
+                    j++;
+                }
+            }
+        }
+        
         team.members = [];
         team.team_status = 'inactive';
     }
