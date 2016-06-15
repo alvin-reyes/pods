@@ -23,7 +23,6 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                     x = j + x;
                 }
             }
-            
         }
         
         for(var i=0;i<teams.length;i++) {

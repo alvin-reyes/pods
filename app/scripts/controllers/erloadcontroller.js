@@ -4,10 +4,6 @@
 angular.module('erLoadUi')
   .controller('erloadctrl', function($scope,$resource,$log,$timeout,$uibModal,dataService,notificationService,patientNurseAssignmentService,erloadAutoStepsService) {
     
-    var dc = new DataCollection(dataService.doctors);
-    console.log(dc);
- 
-    
     $scope.step1 = function() {
         erloadAutoStepsService.step1Logic();
     }

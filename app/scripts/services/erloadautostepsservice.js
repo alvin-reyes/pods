@@ -18,6 +18,8 @@ angular.module('erLoadUi')
         
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
+        
+        //  Re-assign the patient from the out of shifts to the on shifts.
         var activeRns = patientNurseAssignmentService.reAssignNursesPatientToNurses(pods,rnsOnShift);
         
         shiftService.assignNurseToPods(activeRns,pods,2);
