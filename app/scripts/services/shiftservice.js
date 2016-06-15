@@ -5,7 +5,7 @@ angular.module('erLoadUi')
     
     
     this.getDoctorsOnShift = function(time) {
-        var activeDoctorsOnShift = [];
+        var activeDoctorsOnShift = new Array();
         var currentShiftTime = Date.parse(time);
         var shiftS = null;
         var shiftE = null;
@@ -28,7 +28,7 @@ angular.module('erLoadUi')
     
     
     this.getRnsOnOutOfShift = function(time) {
-        var inActiveRnsOutOfShift = [];
+        var inActiveRnsOutOfShift = new Array();
         var currentShiftTime = Date.parse(time);
         var shiftS = null;
         var shiftE = null;
@@ -43,7 +43,7 @@ angular.module('erLoadUi')
                     currentShiftTime)
                 ) {
                     dataService.rns[i].member_status = 'inactive';
-                    inActiveRnsOutOfShift.unshift(dataService.rns[i]);
+                    inActiveRnsOutOfShift.push(dataService.rns[i]);
                 }
                 
             }
@@ -52,14 +52,12 @@ angular.module('erLoadUi')
     
     this.getRnsOnShift = function(time) {
         
-        var activeRnsOnShift = [];
+        var activeRnsOnShift = new Array();
         var currentShiftTime = Date.parse(time);
-        var shiftS = null;
-        var shiftE = null;
         
         for(var i=0;i<dataService.rns.length;i++) {
-            shiftS = Date.parse(dataService.rns[i].shift_start);
-            shiftE = Date.parse(dataService.rns[i].shift_end);
+            var shiftS = Date.parse(dataService.rns[i].shift_start);
+            var shiftE = Date.parse(dataService.rns[i].shift_end);
 
             if(utilityService.checkShiftWithinMilitaryHourRange(
                 shiftS,
@@ -67,7 +65,8 @@ angular.module('erLoadUi')
                 currentShiftTime)
             ) {
                 dataService.rns[i].member_status = 'active';
-                activeRnsOnShift.unshift(dataService.rns[i]);
+                console.log(dataService.rns[i].id);
+                activeRnsOnShift.push(dataService.rns[i]);
             }
         }
         return activeRnsOnShift;
@@ -112,12 +111,13 @@ angular.module('erLoadUi')
         for(var a=0;a<pods.length;a++) {
             for(var b=0;b<numOfIns;b++) {
                 if(pods[a].members.length < limit) {
-                    if(rnsC[0] != null && !teamPodService.checkIfNurseIfAssignedToPods(rnsC[0],pods)) 
-                    {
-                        //rns[i].member_status = 'active';
-                        pods[a].members.push(rnsC[0]);
+                    for(var i=0;i<rns.length;i++) {
+                        if(rns[i] != null && !teamPodService.checkIfNurseIfAssignedToPods(rns[i],dataService.teams)) 
+                        {
+                            pods[a].members.push(rns[i]);
+                            break;
+                        }
                     }
-                    rnsC.splice(0,1);
                 }
             }
         }

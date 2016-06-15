@@ -40,8 +40,7 @@ angular.module('erLoadUi')
         {'id':20,'type':'Nurse','name':'RN Ernie','assigned_patient':[],'member_status':'inactive','shift_start':'19:00','shift_end':'7:00'},
         {'id':21,'type':'Nurse','name':'RN Fiona','assigned_patient':[],'member_status':'inactive','shift_start':'19:00','shift_end':'7:00'},
         {'id':22,'type':'Nurse','name':'RN Glenn','assigned_patient':[],'member_status':'inactive','shift_start':'19:00','shift_end':'7:00'},
-        {'id':23,'type':'Nurse','name':'RN Helen','assigned_patient':[],'member_status':'inactive','shift_start':'19:00','shift_end':'7:00'},
-        {'id':24,'type':'Nurse','name':'RN Isabelle','assigned_patient':[],'member_status':'inactive','shift_start':'19:00','shift_end':'7:00'}
+        {'id':23,'type':'Nurse','name':'RN Helen','assigned_patient':[],'member_status':'inactive','shift_start':'19:00','shift_end':'7:00'}
     ];
     
     this.steps = [

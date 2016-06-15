@@ -8,60 +8,66 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
     this.reAssignPatientsToOnShiftNurses = function(activeNurses,inActiveNurses) {
         
         var newActiveArr = new Array(activeNurses)[0];
+        var newJActiveArr = new Array();
         var inActiveNursesDc = new DataCollection(inActiveNurses);
         
-   
+        //  Get all those who is on shift but not assigned.
+        for(var i=0;i<activeNurses.length;i++) {
+            if(!teamPodService.checkIfNurseIfAssignedToPod(activeNurses[i],dataService.teams)) {
+                newJActiveArr.push(activeNurses[i]);
+            }
+        }
+        
         //  Loop through the inactive ones and replace them with active.
         for(var i=0;i<dataService.teams.length;i++) {
             for(var j=0;j<dataService.teams[i].members.length;j++) {
                 var assignedP = dataService.teams[i].members[j].assigned_patient;
                 if(inActiveNursesDc.query().filter({id:dataService.teams[i].members[j].id}).count() > 0) {
-                    dataService.teams[i].members[j] = newActiveArr[0];
+                    dataService.teams[i].members[j] = newJActiveArr[0];
                     dataService.teams[i].members[j].assigned_patient = assignedP;
-                    
+
                     dataService.dataForReport.unshift({
-                        'pod':dataService.teams[i],
-                        'doctor':dataService.teams[i].doctor,
-                        'rn':newActiveArr[0],
-                        'patient':assignedP});
-                    
-                    newActiveArr.splice(0,1);
+                            'pod':dataService.teams[i],
+                            'doctor':dataService.teams[i].doctor,
+                            'rn':newJActiveArr[0],
+                            'patient':assignedP});
+                    newJActiveArr.splice(0,1);
                     
                 }
             }
         }
-    
+        console.log(JSON.stringify(dataService.teams));
         return activeNurses;
         
     }
-    
-    this.reAssignNursesPatientToNurses = function(teams, activeNurses) {
-        var x = 0;
-        for(var i=0;i<teams.length;i++) {
-            for(var j=0;j<teams[i].members.length;j++) { 
-                var assignedP = teams[i].members[j].assigned_patient;
-                if((teams[i].members[j] == undefined || teams[i].members[j].id != activeNurses[j+x].id)) {
-                    activeNurses[j+x].assigned_patient = assignedP;
-                    teams[i].members[j].member_status = 'inactive';
-
-                    dataService.dataForReport.unshift({
-                        'pod':teams[i],
-                        'doctor':teams[i].doctor,
-                        'rn':activeNurses[j+x],
-                        'patient':activeNurses[j+x].assigned_patient});
-
-                    x = j + x;
-                }
-            }
-        }
-        
-        for(var i=0;i<teams.length;i++) {
-            teams[i].members = [];
-        }
-        
-        return activeNurses;
-        
-    }
+//    
+//    this.reAssignNursesPatientToNurses = function(teams, activeNurses) {
+//        var x = 0;
+//        for(var i=0;i<teams.length;i++) {
+//            for(var j=0;j<teams[i].members.length;j++) { 
+//                var assignedP = teams[i].members[j].assigned_patient;
+//                if((teams[i].members[j] == undefined || teams[i].members[j].id != activeNurses[j+x].id)) {
+//                    activeNurses[j+x].assigned_patient = assignedP;
+//                    teams[i].members[j].member_status = 'inactive';
+//
+//                    dataService.dataForReport.unshift({
+//                        'pod':teams[i],
+//                        'doctor':teams[i].doctor,
+//                        'rn':activeNurses[j+x],
+//                        'patient':activeNurses[j+x].assigned_patient});
+//
+//                    x = j + x;
+//                }
+//            }
+//        }
+//        
+//        for(var i=0;i<teams.length;i++) {
+//            teams[i].members = [];
+//        }
+//        
+//        return activeNurses;
+//        
+//    }
     
     this.reAssignPatientToNurse = function(teams,nurseFrom,nurseTo) {
         for(var i=0;i<teams.length;i++) {
