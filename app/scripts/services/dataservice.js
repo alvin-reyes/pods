@@ -13,7 +13,8 @@ angular.module('erLoadUi')
         {'id':6,'type':'Doctor','name':'Doctor 7','shift_start':'16:00','shift_end':'2:00'},
         {'id':7,'type':'Doctor','name':'Doctor 8','shift_start':'18:30','shift_end':'6:30'},
         {'id':8,'type':'Doctor','name':'Doctor 9','shift_start':'20:00','shift_end':'8:00'},
-        {'id':9,'type':'Doctor','name':'Doctor 10','shift_start':'21:30','shift_end':'9:30'}
+        {'id':9,'type':'Doctor','name':'Doctor 10','shift_start':'21:30','shift_end':'9:30'},
+        {'id':10,'type':'Doctor','name':'Doctor 11','shift_start':'21:30','shift_end':'9:30'}
     ];
     
     this.rns = [

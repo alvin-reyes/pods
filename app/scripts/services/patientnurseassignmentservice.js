@@ -8,19 +8,22 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
         
         var newActiveArr = new Array(activeNurses)[0];
         var newJActiveArr = new Array();
+        var newJAssignedActiveArr = new Array();
         var inActiveNursesDc = new DataCollection(inActiveNurses);
         
         //  Get all those who is on shift but not assigned.
         for(var i=0;i<activeNurses.length;i++) {
             if(!teamPodService.checkIfNurseIfAssignedToPod(activeNurses[i],dataService.teams)) {
                 newJActiveArr.push(activeNurses[i]);
+            }else {
+                //  On-Shift but assigned to pod.
+                newJAssignedActiveArr.push(activeNurses[i]);
             }
         }
         //  Loop through the inactive ones and replace them with active.
         for(var i=0;i<dataService.teams.length;i++) {
             for(var j=0;j<dataService.teams[i].members.length;j++) {
                 var assignedP = dataService.teams[i].members[j].assigned_patient;
-               
                 if(inActiveNursesDc.query().filter({id:dataService.teams[i].members[j].id}).count() > 0) {
                     if(newJActiveArr[0] != null) {
                         dataService.teams[i].members[j] = newJActiveArr[0];
@@ -36,11 +39,27 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                 }
             }
         }
-        
+
         //  Make sure that all inactive members are now out of the pods
         for(var i=0;i<dataService.teams.length;i++) {
             for(var j=0;j<dataService.teams[i].members.length;j++) {
                 if(inActiveNursesDc.query().filter({id:dataService.teams[i].members[j].id}).count() > 0) {
+                    //  but check first if they have an assigned patient. If so, assign them to one of their
+                    //  rns on their pod.
+                    if(dataService.teams[i].members[j].assigned_patient.length > 0) {
+                        for(var x=0;x<dataService.teams[i].members.length;x++) {
+                            if(dataService.teams[i].members[x].member_status == 'active' &&
+                              dataService.teams[i].members[x].id != dataService.teams[i].members[j].id) {
+                                
+                                console.log(" assign to another ");
+                                console.log(dataService.teams[i].members[j].assigned_patient);
+                                
+                                dataService.teams[i].members[x].assigned_patient
+                                    .push(dataService.teams[i].members[j].assigned_patient);
+                                break;
+                            }
+                        }        
+                    }
                     dataService.teams[i].members.splice(j,1);
                 }
             }

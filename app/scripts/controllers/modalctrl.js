@@ -175,11 +175,11 @@ angular.module('erLoadUi')
     
     $scope.ok = function() {
         patientNurseAssignmentService.patientDischarge(patientId,rnId);
+        $uibModalInstance.close();
     }
     $scope.cancel = function () {
         $uibModalInstance.close();
     };
-    $uibModalInstance.close();
 })
 
 angular.module('erLoadUi')

@@ -18,28 +18,28 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
         for(var i=0;i<team.members.length;i++) {
             memberArr.push(team.members[i]);
         }
-            
-        div = memberArr.length/teamsActive.query().filter({team_status:'active'}).count();
-        console.log(JSON.stringify(memberArr));
-        //  assign each members to currently active pods.
-        for(var i=0;i<dataService.teams.length;i++) {
-            if(dataService.teams[i].team_status == 'active') {
-                var j = 0;
-                while(j<div) {
-                    if(memberArr[0] != null) {
-                        if(!this.checkIfNurseIfAssignedToPod(memberArr[0],dataService.teams)){
-                            console.log(">");
-                            dataService.teams[i].members.push(memberArr[0]);
+        
+        if(memberArr.length > 0) {
+            console.log(JSON.stringify(memberArr));
+            div = memberArr.length/teamsActive.query().filter({team_status:'active'}).count();
+            //  assign each members to currently active pods.
+            for(var i=0;i<dataService.teams.length;i++) {
+                if(dataService.teams[i].team_status == 'active') {
+                    var j = 0;
+                    while(j<div) {
+                        if(memberArr[0] != null && memberArr[0] != '') {
+                            if(!this.checkIfNurseIfAssignedToPod(memberArr[0],dataService.teams)){
+                                console.log(memberArr[0]);
+                                dataService.teams[i].members.push(memberArr[0]);
+                            }
+                            memberArr.splice(0,1);
                         }
-                        memberArr.splice(0,1);
+                        j++;
                     }
-                    j++;
                 }
             }
         }
-        
         team.members = [];
-
     }
     
     this.enablePod = function(team) {
@@ -61,6 +61,17 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
     
     this.activatePodsAndReAssign = function() {
         
+    }
+    
+    this.checkIfNurseIfAssignedToNPods = function(nurse,pods) {
+        for(var i=0;i<pods.length;i++) {
+            for(var j=0;j<pods[i].members.length;j++) {
+                if(pods[i].members[j].id == nurse.id) {
+                    return true;
+                }
+            }  
+        }
+        return false;
     }
     
     this.checkIfNurseIfAssignedToPods = function(nurse,pods) {

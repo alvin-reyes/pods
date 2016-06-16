@@ -13,7 +13,6 @@ angular.module('erLoadUi')
         }
         
         var div = Math.ceil(membersArr.length/dataService.teams.length);
-        console.log(div);
         
         for(var i=0;i<dataService.teams.length;i++) {
             if(dataService.teams[i].team_status == 'active') {
@@ -243,6 +242,9 @@ angular.module('erLoadUi')
 
         var activeRns = patientNurseAssignmentService.
         reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
+        
+        dataService.teams[3].doctor = null;
+        
         teamPodService.disableAndShiftPod(dataService.teams[3]);
 
         
@@ -257,7 +259,8 @@ angular.module('erLoadUi')
         
         var activeRns = patientNurseAssignmentService.
         reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
-
+        
+        dataService.teams[2].doctor = null;
         teamPodService.disableAndShiftPod(dataService.teams[2]);
     }
      
@@ -266,15 +269,18 @@ angular.module('erLoadUi')
         var time = "3:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
         var rnsOutOfShift = shiftService.getRnsOnOutOfShift(time);
-        
-        var pods = [dataService.teams[4]];
-        //shiftService.assignNewNursesToPodsN(rnsOnShift,pods);
+        teamPodService.enablePod(dataService.teams[4]);
         var activeRns = patientNurseAssignmentService.
         reAssignPatientsToOnShiftNurses(rnsOnShift,rnsOutOfShift);
         
         teamPodService.disableAndShiftPod(dataService.teams[2]);
         teamPodService.disableAndShiftPod(dataService.teams[3]);
-        teamPodService.enablePod(dataService.teams[4]);
+        
+        dataService.teams[2].doctor = null;
+        dataService.teams[3].doctor = null;
+        
+        dataService.teams[4].doctor = dataService.doctors[10];
+
     }
     
     //  4:00AM
@@ -287,7 +293,10 @@ angular.module('erLoadUi')
         teamPodService.disableAndShiftPod(dataService.teams[1]);
         teamPodService.disableAndShiftPod(dataService.teams[2]);
         teamPodService.disableAndShiftPod(dataService.teams[3]);
-        dataService.teams[0].doctor = dataService.doctors[9];
+        dataService.teams[1].doctor = null;
+        dataService.teams[2].doctor = null;
+        dataService.teams[3].doctor = null;
+        dataService.teams[4].doctor = dataService.doctors[9];
     }
     
     
