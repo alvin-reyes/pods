@@ -4,6 +4,9 @@
 angular.module('erLoadUi')
   .controller('erloadctrl', function($scope,$resource,$log,$timeout,$uibModal,dataService,notificationService,patientNurseAssignmentService,erloadAutoStepsService) {
     
+    $scope.rebalance = function() {
+        erloadAutoStepsService.balancePods(2);
+    }
     $scope.step1 = function() {
         erloadAutoStepsService.step1Logic();
     }
@@ -49,7 +52,7 @@ angular.module('erLoadUi')
     $scope.step15 = function() {
         erloadAutoStepsService.step15Logic();
     }
-    $scope.step156 = function() {
+    $scope.step16 = function() {
         erloadAutoStepsService.step16Logic();
     }
     //  View

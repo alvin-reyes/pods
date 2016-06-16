@@ -3,7 +3,6 @@
 angular.module('erLoadUi').service('patientNurseAssignmentService', function(teamPodService,utilityService,dataService,notificationService){
     
     this.lastPodAssignment = '';
-
     
     this.reAssignPatientsToOnShiftNurses = function(activeNurses,inActiveNurses) {
         
@@ -17,27 +16,37 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                 newJActiveArr.push(activeNurses[i]);
             }
         }
-        
         //  Loop through the inactive ones and replace them with active.
         for(var i=0;i<dataService.teams.length;i++) {
             for(var j=0;j<dataService.teams[i].members.length;j++) {
                 var assignedP = dataService.teams[i].members[j].assigned_patient;
+               
                 if(inActiveNursesDc.query().filter({id:dataService.teams[i].members[j].id}).count() > 0) {
-                    dataService.teams[i].members[j] = newJActiveArr[0];
-                    dataService.teams[i].members[j].assigned_patient = assignedP;
+                    if(newJActiveArr[0] != null) {
+                        dataService.teams[i].members[j] = newJActiveArr[0];
+                        dataService.teams[i].members[j].assigned_patient = assignedP;
 
-                    dataService.dataForReport.unshift({
-                            'pod':dataService.teams[i],
-                            'doctor':dataService.teams[i].doctor,
-                            'rn':newJActiveArr[0],
-                            'patient':assignedP});
-                    newJActiveArr.splice(0,1);
-                    
+                        dataService.dataForReport.unshift({
+                                'pod':dataService.teams[i],
+                                'doctor':dataService.teams[i].doctor,
+                                'rn':newJActiveArr[0],
+                                'patient':assignedP});
+                        newJActiveArr.splice(0,1);
+                     }
                 }
             }
         }
-        console.log(JSON.stringify(dataService.teams));
-        return activeNurses;
+        
+        //  Make sure that all inactive members are now out of the pods
+        for(var i=0;i<dataService.teams.length;i++) {
+            for(var j=0;j<dataService.teams[i].members.length;j++) {
+                if(inActiveNursesDc.query().filter({id:dataService.teams[i].members[j].id}).count() > 0) {
+                    dataService.teams[i].members.splice(j,1);
+                }
+            }
+        }
+        
+        return newJActiveArr;
         
     }
 //    

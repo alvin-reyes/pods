@@ -3,9 +3,13 @@
 'use strict';
 
 angular.module('erLoadUi').service('teamPodService', function(dataService){
-
+    
     this.disablePod = function(team) {
-        
+        team.team_status = 'inactive';
+    }
+    
+    this.disableAndShiftPod = function(team) {
+        team.team_status = 'inactive';
         var memberArr = new Array();
         var memberArrDC = new DataCollection(memberArr);
         var teamsActive = new DataCollection(dataService.teams);
@@ -15,18 +19,19 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
             memberArr.push(team.members[i]);
         }
             
-        div =memberArr.length/teamsActive.query().filter({team_status:'active'}).count();
-        console.log(Math.ceil(div));
-        
+        div = memberArr.length/teamsActive.query().filter({team_status:'active'}).count();
+        console.log(JSON.stringify(memberArr));
         //  assign each members to currently active pods.
         for(var i=0;i<dataService.teams.length;i++) {
             if(dataService.teams[i].team_status == 'active') {
                 var j = 0;
                 while(j<div) {
                     if(memberArr[0] != null) {
-                        dataService.teams[i].members.push(memberArr[0]);
+                        if(!this.checkIfNurseIfAssignedToPod(memberArr[0],dataService.teams)){
+                            console.log(">");
+                            dataService.teams[i].members.push(memberArr[0]);
+                        }
                         memberArr.splice(0,1);
-                        
                     }
                     j++;
                 }
@@ -34,7 +39,7 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
         }
         
         team.members = [];
-        team.team_status = 'inactive';
+
     }
     
     this.enablePod = function(team) {
