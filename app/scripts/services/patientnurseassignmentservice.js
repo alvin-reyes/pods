@@ -47,15 +47,12 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                     //  but check first if they have an assigned patient. If so, assign them to one of their
                     //  rns on their pod.
                     if(dataService.teams[i].members[j].assigned_patient.length > 0) {
+                        
                         for(var x=0;x<dataService.teams[i].members.length;x++) {
                             if(dataService.teams[i].members[x].member_status == 'active' &&
                               dataService.teams[i].members[x].id != dataService.teams[i].members[j].id) {
-                                
-                                console.log(" assign to another ");
-                                console.log(dataService.teams[i].members[j].assigned_patient);
-                                
                                 dataService.teams[i].members[x].assigned_patient
-                                    .push(dataService.teams[i].members[j].assigned_patient);
+                                    .push(dataService.teams[i].members[j].assigned_patient[0]);
                                 break;
                             }
                         }        

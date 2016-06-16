@@ -235,6 +235,16 @@ angular.module('erLoadUi')
     
     //  11:00PM
     this.step13Logic = function() {
+        
+        //  Discharge all patient on POD 4
+        for(var i=0;i<dataService.teams[3].members.length;i++) {
+            for(var j=0;j<dataService.teams[3].members[i].assigned_patient.length;j++) {
+                patientNurseAssignmentService.patientDischarge(
+                    dataService.teams[3].members[i].assigned_patient[j],
+                    dataService.teams[3].members[i]);   
+            }   
+        }
+        
         notificationService.setSuccessNotification("11:00PM Shift has started");
         var time = "23:00";
         var rnsOnShift = shiftService.getRnsOnShift(time);
