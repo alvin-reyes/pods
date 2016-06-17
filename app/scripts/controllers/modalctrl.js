@@ -174,6 +174,8 @@ angular.module('erLoadUi')
   .controller('dischargepatientctrl', function ($scope,$resource,$log,$timeout,$http,$uibModalInstance,patientId,rnId,podId,dataService,patientNurseAssignmentService) {
     
     $scope.ok = function() {
+        console.log(patientId);
+        console.log(rnId);
         patientNurseAssignmentService.patientDischarge(patientId,rnId);
         $uibModalInstance.close();
     }

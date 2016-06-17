@@ -65,35 +65,7 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
         return newJActiveArr;
         
     }
-//    
-//    this.reAssignNursesPatientToNurses = function(teams, activeNurses) {
-//        var x = 0;
-//        for(var i=0;i<teams.length;i++) {
-//            for(var j=0;j<teams[i].members.length;j++) { 
-//                var assignedP = teams[i].members[j].assigned_patient;
-//                if((teams[i].members[j] == undefined || teams[i].members[j].id != activeNurses[j+x].id)) {
-//                    activeNurses[j+x].assigned_patient = assignedP;
-//                    teams[i].members[j].member_status = 'inactive';
-//
-//                    dataService.dataForReport.unshift({
-//                        'pod':teams[i],
-//                        'doctor':teams[i].doctor,
-//                        'rn':activeNurses[j+x],
-//                        'patient':activeNurses[j+x].assigned_patient});
-//
-//                    x = j + x;
-//                }
-//            }
-//        }
-//        
-//        for(var i=0;i<teams.length;i++) {
-//            teams[i].members = [];
-//        }
-//        
-//        return activeNurses;
-//        
-//    }
-    
+
     this.reAssignPatientToNurse = function(teams,nurseFrom,nurseTo) {
         for(var i=0;i<teams.length;i++) {
             for(var j=0;j<teams[i].members.length;j++) {
@@ -113,9 +85,11 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
     
     this.patientDischarge = function(patientId,nurseId) {
         var patient = null;
+        console.log("discharge");
         for(var i=0;i<nurseId.assigned_patient.length;i++) {
-            if(nurseId.assigned_patient[i].id = patientId) {
+            if(nurseId.assigned_patient[i].id == patientId.id) {
                 patient = nurseId.assigned_patient[i];
+                console.log( nurseId.assigned_patient[i]);
                 nurseId.assigned_patient.splice(i,1);
                 break;
             }
@@ -148,9 +122,11 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                         nurseName = teams[j]['members'][x];
                         teamName = teams[j];
                         //  Create the data structure
-                        patient = {'name': patientName};
+                        patient = {'id':(teams[j]['members'][x]['assigned_patient'].length + 1),
+                                   'name': patientName};
                         teams[j]['members'][x]['assigned_patient'].unshift(patient);
                         teams[j]['count']++;
+                        teams[j].doctor.count++;
                         breakLine = true;
                         break;
                     }
@@ -173,8 +149,11 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
         var numberOfPat = [];
         var patient;
         
+        //teamPodService.determinePatientAssignmentToDoctor(teams);
+        
         //  Before we assign, let's get the active POD with the least number of patients.
-        var assignedPod = teamPodService.determinePatientAssignmentToPod(teams);
+        //var assignedPod = teamPodService.determinePatientAssignmentToPod(teams);
+        var assignedPod = teamPodService.determinePatientAssignmentToDoctorPod(teams);
         var nursePod = this.determinePatientAssignedPodtoNurse(assignedPod.pod);
         //console.log(teamPodService.numberOfPatientsInPod(teams[0]));
         //  Team Assignment Algorithm Check.
@@ -192,9 +171,11 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                         nurseName = teams[j]['members'][x];
                         teamName = teams[j];
                         //  Create the data structure
-                        patient = {'name': patientName};
+                        patient = {'id':(teams[j]['members'][x]['assigned_patient'].length + 1),
+                                   'name': patientName};
                         teams[j]['members'][x]['assigned_patient'].unshift(patient);
                         teams[j]['count']++;
+                        teams[j].doctor.count++;
                         breakLine = true;
                         break;
                     }
