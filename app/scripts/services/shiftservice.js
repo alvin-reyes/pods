@@ -121,44 +121,28 @@ angular.module('erLoadUi')
                 }
             }
         }
-        
-        //  Balance out the pods based on the limit
-//        for(var a=0;a<pods.length;a++) {
-//            if(pods[a].members.length > limit) {
-//                for(var b=0;b<(pods[a].members.length - limit);b++) {
-//                    rnsBalance.push(pods[a].members[b]);
-//                }
-//            }
-//        }
-//        
-//        //  Balancer
-//        for(var a=0;a<pods.length;a++) {
-//            if(pods[a].members.length < limit) {
-//                for(var b=0;b<(pods[a].members.length - limit);b++) {
-//                    rnsBalance.push(pods[a].members[b]);
-//                }
-//            }
-//        }
+    }
+    
+    this.unShiftDoctor = function(doc) {
+        //  just reset the count of the doctor but not the pod.
+        doc.count = 0;
         
     }
-
-//    this.assignNurseToPods = function(rns,pods,limitperpod) {
-//
-//        var x = 0;
-//        for(var i=0;i<pods.length;i++) {
-//            for(var j=0;j<limitperpod;j++) {
-//                if(pods[i].members[j] == undefined || (pods[i].members[j].id != rns[j+x].id)) {
-//                    if(!teamPodService.checkIfNurseIfAssignedToPod(rns[j+x])) {
-//                        rns[j+x].member_status = 'active';
-//                        pods[i].members.push(rns[j+x]);
-//                    }
-//                }
-//            }
-//            x = j + x;
-//        }
-//        
-//
-//    }
+    
+    this.shiftDoctor = function(pod,docTo) {
+        //  make sure to get the count of the doctor
+        var c = 0;
+        console.log(pod.doctor);
+        if(pod.doctor != null){
+            if(pod.doctor.count != undefined) {
+                c = pod.doctor.count;
+            }
+        }
+    
+        docTo.count = c; // transfer the count of patients.
+        pod.doctor = docTo; // then replace.
+        
+    }
     
     this.replaceNursesOnPods = function(rns,pods) {
         

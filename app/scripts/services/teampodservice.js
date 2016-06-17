@@ -127,8 +127,10 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
         var doctorArrDC = new DataCollection(doctorArr);
         
         for(var i=0;i<dataService.teams.length;i++) {
-            if(doctorArrDC.query().filter({id:dataService.teams[i].doctor.id}).count() == 0) {
-                doctorArrDC.insert(dataService.teams[i].doctor);
+            if(dataService.teams[i].team_status == 'active') {
+                if(doctorArrDC.query().filter({id:dataService.teams[i].doctor.id}).count() == 0) {
+                    doctorArrDC.insert(dataService.teams[i].doctor);
+                }
             }
         }
         
