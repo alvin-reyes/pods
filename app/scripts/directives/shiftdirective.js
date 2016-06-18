@@ -103,12 +103,15 @@ angular.module('erLoadUi').directive('shiftdirective', function($uibModal,notifi
             });
         }
         
-        $scope.patientDetails = function() {
+        $scope.patientDetails = function(patient) {
             var modalInstance = $uibModal.open({
                 animation: true,
+                windowClass: 'app-modal-window',
+                controller: 'patientdetailsctrl',
                 templateUrl: 'pages/modal/patientdetails.html',
                 size: 'lg',
                 resolve: {
+                    patient: function() {return patient;}
                 }
             });
         }

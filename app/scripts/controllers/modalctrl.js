@@ -165,9 +165,13 @@ angular.module('erLoadUi')
 })
 
 angular.module('erLoadUi')
-  .controller('patientdetailsctrl', function ($scope,$resource,$log,$timeout,$http,$uibModalInstance) {
+  .controller('patientdetailsctrl', function ($scope,$resource,$log,$timeout,patient, $http,$uibModalInstance) {
     
-    $scope.hello = "hello";
+    $scope.patient = patient;
+    
+    $scope.cancel = function() {
+        $uibModalInstance.close();
+    };
 })
 
 angular.module('erLoadUi')
@@ -187,6 +191,12 @@ angular.module('erLoadUi')
 angular.module('erLoadUi')
     .controller('memberdetailsctrl',function
      ($scope,$resource,$log,$timeout,$http,$uibModalInstance,member,dataService) {
+    
+    $scope.rnId = member;
+    
+    $scope.cancel = function() {
+        $uibModalInstance.close();
+    };
 })
 
 angular.module('erLoadUi')
@@ -196,6 +206,12 @@ angular.module('erLoadUi')
 
 angular.module('erLoadUi')
     .controller('doctordetailsctrl',function ($scope,$resource,$log,$timeout,$http,$uibModalInstance,doctor,dataService) {
+    
+    $scope.doc = doctor;
+    
+    $scope.cancel = function() {
+        $uibModalInstance.close();
+    };
 })
 
 angular.module('erLoadUi')

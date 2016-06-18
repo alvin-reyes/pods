@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="btn btn-default btn-sm" ng-click="podDetails(team)">{{team.name}}</div>
-                <div class="btn btn-default btn-sm" ng-click="doctorDetailOptions(team)">{{team.doctor.name}}</div>
+                <div class="btn btn-default btn-sm" ng-click="doctorDetailOptions(team.doctor)">{{team.doctor.name}}</div>
                 <div class="btn btn-default btn-sm glyphicon glyphicon-retweet" ng-click="switchWithAnotherDoctor(team,team.doctor)"></div>
             </div>
             <div class="col-md-7">
@@ -21,12 +21,12 @@
                                   </li>
                                     <li class="divider"></li>
                                 <li role="menuitem">
-                                    <a href="#" ng-click="removePod(team)" class="">Remove POD</a>
+                                    <a href="#" ng-click="removePod(team)" class="">Remove</a>
                                 </li>
                                 <li role="menuitem">
                                     <a href="#" ng-click="markTeamAsBusy(team)" class="">
-                                        <p ng-show="team.team_status == 'active'">Set to <b style="color:red;">BUSY</b></p>
-                                        <p ng-show="team.team_status != 'active'">Set to <b style="color:green;">ACTIVE</b></p>
+                                        <div ng-show="team.team_status == 'active'"><b style="color:red;">BUSY</b></div>
+                                        <div ng-show="team.team_status != 'active'"><b style="color:green;">ACTIVE</b></div>
                                     </a>
                                 </li>
                    
@@ -59,22 +59,22 @@
                             <td class="col-md-1 text-center">
                             <div class="btn-group" uib-dropdown dropdown-append-to-body>
                               <button id="btn-append-to-body" type="button" class="btn btn-primary glyphicon glyphicon-chevron-down" uib-dropdown-toggle>
-                                <span class="caret"></span>
+                                <span class="caret" ></span>
                               </button>
                               <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
                                 <li role="menuitem">
-                                    <a href="#" ng-click="reassignNurse(member,team)" class="">Reassign to</a>
+                                    <a href="#" ng-click="reassignNurse(member,team)" class="">Reassign</a>
                                 </li>
                                 <li role="menuitem">
-                                    <a href="#" ng-click="switchWithAnotherNurse(member,team)" class="">Switch with another RN</a>
+                                    <a href="#" ng-click="switchWithAnotherNurse(member,team)" class="">Switch</a>
                                 </li>
                                 <li role="menuitem">
                                     <a href="#" ng-click="removeNurse(member,team)" class="">Remove</a>
                                 </li>
                                 <li role="menuitem">
                                     <a href="#" ng-click="markMemberAsBusy(member,team)" class="">
-                                        <p ng-show="member.member_status == 'active'">Set to <b style="color:red;">BUSY</b></p>
-                                        <p ng-show="member.member_status != 'active'">Set to <b style="color:green;">ACTIVE</b></p>
+                                        <div ng-show="member.member_status == 'active'"><b style="color:red;">BUSY</b></div>
+                                        <div ng-show="member.member_status != 'active'"><b style="color:green;">ACTIVE</b></div>
                                     </a>
                                 </li>
 
