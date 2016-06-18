@@ -207,10 +207,11 @@ angular.module('erLoadUi')
     $scope.rnPlacement = [];
 
     $scope.getAllNurse = function() {
+        console.log("all nurse");
         for(var i=0;i<dataService.rns.length;i++) {
-            if(dataService.rns[i].member_status != 'active') {
+            //if(dataService.rns[i].member_status == 'active') {
                 $scope.rns.unshift(dataService.rns[i]);
-            }
+            //}
         }
         $scope.rnPlacement = [{options:$scope.rns,selected:'Select RN'}];
         $scope.rnPlacement = $scope.rnPlacement[0];
@@ -400,5 +401,35 @@ angular.module('erLoadUi')
     };
 });
 
+angular.module('erLoadUi')
+ .controller('removenursectrl',function($scope,$uibModalInstance,dataService,notificationService,patientNurseAssignmentService,rnId,podId){
+    
+    $scope.rnId = rnId;
+    $scope.podId = podId;
+    
+    $scope.ok = function () {
+        
+        for(var i=0;i<podId.members.length;i++) {
+            if(podId.members[i].id == rnId.id) {
+                
+                for(var j=0;j<podId.members[i].assigned_patient.length;j++) {
+                    patientNurseAssignmentService.patientDischarge(
+                        podId.members[i].assigned_patient[j],
+                        podId.members[i]);   
+                }
+                
+                podId.members.splice(i,1);
+                break;
+            }
+        }
+        
+        console.log("rm");
+        $uibModalInstance.close();
+    };
+    
+    $scope.cancel = function() {
+        $uibModalInstance.close();
+    };
+});
 
 

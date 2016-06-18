@@ -46,11 +46,15 @@
                                     <a href="#" ng-click="switchWithAnotherNurse(member,team)" class="">Switch with another RN</a>
                                 </li>
                                 <li role="menuitem">
+                                    <a href="#" ng-click="removeNurse(member,team)" class="">Remove</a>
+                                </li>
+                                <li role="menuitem">
                                     <a href="#" ng-click="markMemberAsBusy(member,team)" class="">
                                         <p ng-show="member.member_status == 'active'">Set to <b style="color:red;">BUSY</b></p>
                                         <p ng-show="member.member_status != 'active'">Set to <b style="color:green;">ACTIVE</b></p>
                                     </a>
                                 </li>
+
                               </ul>
                             <!--
                              <button style="margin:0px 0px 0px 2px;" type="button" ng-click="markMemberAsBusy(member,team)"  ng-class="{'btn btn-default btn-sm glyphicon glyphicon-stop pull-right' : member.member_status == 'active','btn btn-danger btn-sm glyphicon glyphicon-stop pull-right' : member.member_status != 'active'}"></button>

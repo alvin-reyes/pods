@@ -34,6 +34,21 @@ angular.module('erLoadUi').directive('shiftdirective', function($uibModal,notifi
             
         }
         
+        $scope.removeNurse = function(rnId,podId) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                windowClass: 'app-modal-window',
+                controller: 'removenursectrl',
+                templateUrl: 'pages/modal/removenurse.html',
+                size: 'lg',
+                resolve: {
+                    rnId : function() {return rnId;},
+                    podId : function() {return podId;}
+                }
+            });
+            notificationService.setErrorNotification("Remove <u>" + rnId.name + "</u> from "  + podId.name);
+        }
+        
         $scope.markMemberAsBusy = function(rnId) {
             if(rnId.member_status == 'active') {
                 rnId.member_status = 'inactive';

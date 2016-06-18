@@ -26,6 +26,7 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                 var assignedP = dataService.teams[i].members[j].assigned_patient;
                 if(inActiveNursesDc.query().filter({id:dataService.teams[i].members[j].id}).count() > 0) {
                     if(newJActiveArr[0] != null) {
+                        dataService.teams[i].members[j].assigned_patient = null;
                         dataService.teams[i].members[j] = newJActiveArr[0];
                         dataService.teams[i].members[j].assigned_patient = assignedP;
 
