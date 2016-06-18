@@ -49,6 +49,20 @@ angular.module('erLoadUi').directive('shiftdirective', function($uibModal,notifi
             notificationService.setErrorNotification("Remove <u>" + rnId.name + "</u> from "  + podId.name);
         }
         
+        $scope.removePod = function(podId) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                windowClass: 'app-modal-window',
+                controller: 'removepodctrl',
+                templateUrl: 'pages/modal/removepod.html',
+                size: 'lg',
+                resolve: {
+                    podId : function() {return podId;}
+                }
+            });
+            notificationService.setErrorNotification("Remove <u>" + podId.name + "</u>");
+        }
+        
         $scope.markMemberAsBusy = function(rnId) {
             if(rnId.member_status == 'active') {
                 rnId.member_status = 'inactive';

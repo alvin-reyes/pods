@@ -9,7 +9,23 @@
                 <div class="btn btn-default btn-sm glyphicon glyphicon-retweet" ng-click="switchWithAnotherDoctor(team,team.doctor)"></div>
             </div>
             <div class="col-md-7">
-                <button type="button" class="btn btn-default btn-sm pull-right glyphicon glyphicon-stop" ng-click="markTeamAsBusy(team)"></button>
+                <div class="btn-group pull-right" uib-dropdown dropdown-append-to-body>
+                              <button id="btn-append-to-body" type="button" class="btn btn-default glyphicon glyphicon-chevron-down" uib-dropdown-toggle>
+                                <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                                <li role="menuitem">
+                                    <a href="#" ng-click="removePod(team)" class="">Remove POD</a>
+                                </li>
+                                <li role="menuitem">
+                                    <a href="#" ng-click="markTeamAsBusy(team)" class="">
+                                        <p ng-show="team.team_status == 'active'">Set to <b style="color:red;">BUSY</b></p>
+                                        <p ng-show="team.team_status != 'active'">Set to <b style="color:green;">ACTIVE</b></p>
+                                    </a>
+                                </li>
+
+                              </ul>
+                    </div>
 
             </div>
             <!--

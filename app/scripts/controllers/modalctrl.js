@@ -433,3 +433,31 @@ angular.module('erLoadUi')
 });
 
 
+angular.module('erLoadUi')
+ .controller('removepodctrl',function($scope,$uibModalInstance,dataService,notificationService,patientNurseAssignmentService,podId){
+    
+    $scope.podId = podId;
+    
+    $scope.ok = function () {
+        console.log(podId.members.length);
+        console.log(JSON.stringify(podId.members));
+        if(podId.members.length > 0) {
+            console.log(podId.members.length);
+            var ln = podId.members.length;
+            for(var i=0;i<ln;i++) {
+                for(var j=0;j<podId.members[i].assigned_patient.length;j++) {
+                        patientNurseAssignmentService.patientDischarge(
+                            podId.members[i].assigned_patient[j],
+                            podId.members[i]);   
+                }
+            }
+        }
+        dataService.teams.splice(dataService.teams.indexOf(podId),1);
+        $uibModalInstance.close();
+    };
+    
+    $scope.cancel = function() {
+        $uibModalInstance.close();
+    };
+});
+
