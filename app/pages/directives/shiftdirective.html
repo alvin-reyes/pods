@@ -14,6 +14,12 @@
                                 <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                            
+                                  <li role="menuitem">
+                                   <a href="#" ng-click="assignNurse(team)" ng-show="team.team_status == 'active'">Assign Nurse
+                                    </a>
+                                  </li>
+                                    <li class="divider"></li>
                                 <li role="menuitem">
                                     <a href="#" ng-click="removePod(team)" class="">Remove POD</a>
                                 </li>
@@ -23,6 +29,7 @@
                                         <p ng-show="team.team_status != 'active'">Set to <b style="color:green;">ACTIVE</b></p>
                                     </a>
                                 </li>
+                   
 
                               </ul>
                     </div>
@@ -107,12 +114,14 @@
         </div>
     </div>
     <div class="panel-footer">
+<!--
         <div class="row">
             <div class="col-sm-12">
                 <div class="btn btn-default btn-lg panel pull-right panel-default" ng-click="assignNurse(team)" ng-show="team.team_status == 'active'">+
                 </div>
             </div>
         </div>
+-->
     </div>
     </div>
     
