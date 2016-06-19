@@ -4,17 +4,17 @@ angular.module('erLoadUi')
     .service('dataService', function() {
     
     this.doctors = [
-        {'id':0,'type':'Doctor','name':'Doctor 1','shift_start':'5:30','shift_end':'15:30','count': '0'},
-        {'id':1,'type':'Doctor','name':'Doctor 2','shift_start':'5:30','shift_end':'17:30','count': '0'},
-        {'id':2,'type':'Doctor','name':'Doctor 3','shift_start':'8:00','shift_end':'20:00','count': '0'},
-        {'id':3,'type':'Doctor','name':'Doctor 4','shift_start':'9:00','shift_end':'21:00','count': '0'},
-        {'id':4,'type':'Doctor','name':'Doctor 5','shift_start':'11:00','shift_end':'23:00','count': '0'},
-        {'id':5,'type':'Doctor','name':'Doctor 6','shift_start':'15:00','shift_end':'23:59','count': '0'},
-        {'id':6,'type':'Doctor','name':'Doctor 7','shift_start':'16:00','shift_end':'2:00','count': '0'},
-        {'id':7,'type':'Doctor','name':'Doctor 8','shift_start':'18:30','shift_end':'6:30','count': '0'},
-        {'id':8,'type':'Doctor','name':'Doctor 9','shift_start':'20:00','shift_end':'8:00','count': '0'},
-        {'id':9,'type':'Doctor','name':'Doctor 10','shift_start':'21:30','shift_end':'9:30','count': '0'},
-        {'id':10,'type':'Doctor','name':'Doctor 11','shift_start':'21:30','shift_end':'9:30','count': '0'}
+        {'id':0,'type':'Doctor','name':'Doctor 1','shift_start':'5:30','shift_end':'15:30','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':1,'type':'Doctor','name':'Doctor 2','shift_start':'5:30','shift_end':'17:30','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':2,'type':'Doctor','name':'Doctor 3','shift_start':'8:00','shift_end':'20:00','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':3,'type':'Doctor','name':'Doctor 4','shift_start':'9:00','shift_end':'21:00','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':4,'type':'Doctor','name':'Doctor 5','shift_start':'11:00','shift_end':'23:00','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':5,'type':'Doctor','name':'Doctor 6','shift_start':'15:00','shift_end':'23:59','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':6,'type':'Doctor','name':'Doctor 7','shift_start':'16:00','shift_end':'2:00','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':7,'type':'Doctor','name':'Doctor 8','shift_start':'18:30','shift_end':'6:30','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':8,'type':'Doctor','name':'Doctor 9','shift_start':'20:00','shift_end':'8:00','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':9,'type':'Doctor','name':'Doctor 10','shift_start':'21:30','shift_end':'9:30','count': '0',patient_priority_fl: 'N','patient_priority_lm':0},
+        {'id':10,'type':'Doctor','name':'Doctor 11','shift_start':'21:30','shift_end':'9:30','count': '0',patient_priority_fl: 'N','patient_priority_lm':0}
     ];
     
     this.rns = [

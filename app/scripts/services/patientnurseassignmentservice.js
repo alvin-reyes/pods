@@ -174,6 +174,18 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                         //  Create the data structure
                         patient = {'id':(teams[j]['members'][x]['assigned_patient'].length + 1),
                                    'name': patientName};
+                        
+//                        
+//                        if(dataService.doctors[dataService.doctors.
+//                                            indexOf(teams[j].doctor)].patient_priority_lm < 2) {
+//                            dataService.doctors[dataService.doctors.
+//                                            indexOf(teams[j].doctor)].patient_priority_lm++;
+//
+//                        }else {
+//                            dataService.doctors[dataService.doctors.
+//                                            indexOf(teams[j].doctor)].patient_priority_fl = 'N';
+//                        }
+                        
                         teams[j]['members'][x]['assigned_patient'].unshift(patient);
                         teams[j]['count']++;
                         teams[j].doctor.count++;

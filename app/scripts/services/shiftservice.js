@@ -132,19 +132,15 @@ angular.module('erLoadUi')
     this.shiftDoctor = function(pod,docTo) {
         //  make sure to get the count of the doctor
         var c = 0;
-        console.log(pod.doctor);
         if(pod.doctor != null){
             if(pod.doctor.count != undefined) {
                 c = pod.doctor.count;
+                //pod.doctor.count = 0;
             }
         }
-    
+        docTo.patient_priority_fl = 'Y';
         docTo.count = c; // transfer the count of patients.
         pod.doctor = docTo; // then replace.
-        
-    }
-    
-    this.replaceNursesOnPods = function(rns,pods) {
         
     }
     

@@ -53,16 +53,7 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
         
         return teams;
     }
-    
-    this.disablePodAndTransfer = function(team) {
-        
-    }
-    
-    
-    this.activatePodsAndReAssign = function() {
-        
-    }
-    
+
     this.checkIfNurseIfAssignedToNPods = function(nurse,pods) {
         for(var i=0;i<pods.length;i++) {
             for(var j=0;j<pods[i].members.length;j++) {
@@ -121,8 +112,7 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
     }
     
     this.determinePatientAssignmentToDoctorPod = function(pods) {
-        
-        
+
         var doctorArr = new Array();
         var doctorArrDC = new DataCollection(doctorArr);
         
@@ -133,6 +123,16 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
                 }
             }
         }
+        
+        //  Get the priority doctors first (front-load)
+//        var doctorPriority = null;
+//        if(doctorArrDC.query().filter({patient_priority_fl:'Y'}).count() > 0) {
+//            doctorPriority = doctorArrDC.query().filter({patient_priority_fl:'Y'});
+//            doctorArrDC = doctorPriority;
+//        }
+//        console.log(doctorArrDC);
+//        console.log(doctorPriority);
+//        console.log(dataService.doctors);
         
         //  get the doctor with the lowest number and return pod.
         var lowestNumberD = 9999;

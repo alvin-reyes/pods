@@ -270,25 +270,14 @@ angular.module('erLoadUi')
      ($scope,$resource,$log,$timeout,$http,$uibModalInstance,team,doctor,dataService,notificationService,patientNurseAssignmentService) {
     
     $scope.selectedDoctor = '';
-    $scope.doctors = [];
-    $scope.dcPlacement = [];
-    $scope.getAllDoctors = function() {
-        for(var i=0;i<dataService.doctors.length;i++) {
-            $scope.doctors.unshift(dataService.doctors[i]);
-        }
-        $scope.dcPlacement = [{options:$scope.doctors,selected:'Select Doctor'}];
-        $scope.dcPlacement = $scope.dcPlacement[0];
+    $scope.setDoctor = function(item) {
+        $scope.selectedDoctor = item;
     }
     
-    $scope.selectDoctor = function() {
-        for(var i=0;i<$scope.doctors.length;i++) {
-            if($scope.doctors[i].id == $scope.dcPlacement.selected) {
-                $scope.selectedDoctor = $scope.doctors[i];
-                break;
-            }
-        }
+    $scope.doctors = function() {
+        return dataService.doctors;
     }
-    
+
     $scope.ok = function () {
         //  Switch to another doctor.
         for(var i=0;i<dataService.teams.length;i++) {
@@ -310,27 +299,15 @@ angular.module('erLoadUi')
 angular.module('erLoadUi')
  .controller('assignnursectrl',function($scope,$uibModalInstance,team,dataService,notificationService,patientNurseAssignmentService){
                 
-$scope.selectedNurse = "";
-    $scope.rns = [];
-    $scope.rnPlacement = [];
-
-    $scope.getAllNurse = function() {
-        for(var i=0;i<dataService.rns.length;i++) {
-            if(dataService.rns[i].member_status != 'active') {
-                $scope.rns.unshift(dataService.rns[i]);
-            }
-        }
-        $scope.rnPlacement = [{options:$scope.rns,selected:'Select RN'}];
-        $scope.rnPlacement = $scope.rnPlacement[0];
+    $scope.selectedNurse = "";
+    
+    
+    $scope.nurses = function() {
+        return dataService.rns;
     }
     
-    $scope.selectNurse = function() {
-        for(var i=0;i<$scope.rns.length;i++) {
-            if($scope.rns[i].id == $scope.rnPlacement.selected) {
-                $scope.selectedNurse = $scope.rns[i];
-                break;
-            }
-        }
+    $scope.setNurse = function(item) {
+        $scope.selectedNurse = item;
     }
         
     $scope.ok = function () {
