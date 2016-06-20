@@ -10,13 +10,20 @@ angular.module('erLoadUi')
     $scope.teamsOnly = [];
     $scope.selectedTeamId = "";
     
-    $scope.getTeamsOnly = function() {
-        for(var i=0;i<dataService.teams.length;i++) {
-            if(dataService.teams[i].team_status == 'active') {
-                $scope.teamsOnly.unshift(dataService.teams[i]);
-            }
+    function filterActive(team) {
+        if(team.team_status == 'active') {
+            return team;
         }
-    };
+    }
+    
+    $scope.activePods = function() {
+        return dataService.teams.filter(filterActive);
+    }
+    
+    $scope.setPod = function(item) {
+        $scope.selectedTeamId = item.id;
+    }
+    
  
     $scope.ok = function () {
         //  Where to reassign the nurse?
@@ -222,25 +229,14 @@ angular.module('erLoadUi')
     $scope.rns = [];
     $scope.rnPlacement = [];
 
-    $scope.getAllNurse = function() {
-        console.log("all nurse");
-        for(var i=0;i<dataService.rns.length;i++) {
-            //if(dataService.rns[i].member_status == 'active') {
-                $scope.rns.unshift(dataService.rns[i]);
-            //}
-        }
-        $scope.rnPlacement = [{options:$scope.rns,selected:'Select RN'}];
-        $scope.rnPlacement = $scope.rnPlacement[0];
+    $scope.nurses = function() {
+        return dataService.rns;
     }
     
-    $scope.selectNurse = function() {
-        for(var i=0;i<$scope.rns.length;i++) {
-            if($scope.rns[i].id == $scope.rnPlacement.selected) {
-                $scope.selectedNurse = $scope.rns[i];
-                break;
-            }
-        }
+    $scope.setNurse = function(item){
+        $scope.selectedNurse = item;
     }
+
         
     $scope.ok = function () {
         

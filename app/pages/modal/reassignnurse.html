@@ -1,14 +1,14 @@
 
 
-<div class="modal-header" ng-init="getTeamsOnly()">
+<div class="modal-header" >
         <h3 class="modal-title">Re-assign</h3>
     </div>
     <div class="modal-body">
     
         <label>Select POD</label>
-        <select class="form-control" name="rnSelect" ng-model="selectedTeamId">
-          <option ng-repeat="a in teamsOnly" value="{{a.id}}">{{a.name}}</option>
-        </select>
+        
+        <input type="text" ng-model="rnSelect" uib-typeahead="pods.name for pods in activePods() | filter:$viewValue | limitTo:8" class="form-control" typeahead-editable="false"
+       typeahead-on-select="setPod($item)">
         
         </div>
 

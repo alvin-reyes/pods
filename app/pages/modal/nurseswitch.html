@@ -1,14 +1,13 @@
 
 
-<div class="modal-header" ng-init="getAllNurse()">
+<div class="modal-header">
         <h3 class="modal-title">Switch Nurse</h3>
     </div>
     <div class="modal-body">
     
         <label>Select RN</label>
-        <select class="form-control" name="rnSelect" ng-model="rnPlacement.selected" ng-change="selectNurse()">
-          <option ng-repeat="o in rnPlacement.options" value="{{o.id}}">{{o.name}}</option>
-        </select>
+        <input type="text" ng-model="rnSelect" uib-typeahead="nurse.name for nurse in nurses() | filter:$viewValue | limitTo:8" class="form-control" typeahead-editable="false"
+       typeahead-on-select="setNurse($item)">
         
         </div>
 
