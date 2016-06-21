@@ -62,7 +62,6 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                 }
             }
         }
-        
         return newJActiveArr;
         
     }
@@ -105,7 +104,6 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
     
     //  For manual assignment
     this.assignPatientToNurse = function(patientName, patientAssignmentLimit, teams, nurseId) {
-        console.log("manual");
         var teamName = "";
         var nurseName = "";
         var breakLine = false;
@@ -127,7 +125,7 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                                    'name': patientName};
                         teams[j]['members'][x]['assigned_patient'].unshift(patient);
                         teams[j]['count']++;
-                        teams[j].doctor.count++;
+                        teams[j].doctor.count = teams[j]['count'];
                         breakLine = true;
                         break;
                     }
@@ -143,7 +141,6 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
     
     //  For automatic assignment
     this.assignPatient = function(patientName, patientAssignmentLimit, teams) {
-        console.log("auto");
         var teamName = "";
         var nurseName = "";
         var breakLine = false;
@@ -172,23 +169,19 @@ angular.module('erLoadUi').service('patientNurseAssignmentService', function(tea
                         nurseName = teams[j]['members'][x];
                         teamName = teams[j];
                         //  Create the data structure
-                        patient = {'id':(teams[j]['members'][x]['assigned_patient'].length + 1),
-                                   'name': patientName};
-                        
-//                        
-//                        if(dataService.doctors[dataService.doctors.
-//                                            indexOf(teams[j].doctor)].patient_priority_lm < 2) {
-//                            dataService.doctors[dataService.doctors.
-//                                            indexOf(teams[j].doctor)].patient_priority_lm++;
-//
-//                        }else {
-//                            dataService.doctors[dataService.doctors.
-//                                            indexOf(teams[j].doctor)].patient_priority_fl = 'N';
-//                        }
+                        patient = {
+                                    'id':(teams[j]['members'][x]['assigned_patient'].length + 1),
+                                    'name': patientName
+                                  };
+                        if(teams[j].doctor.patient_priority_lm < 1) {
+                            teams[j].doctor.patient_priority_lm++;
+                        }else {
+                            teams[j].doctor.patient_priority_fl = 'N';
+                        }
                         
                         teams[j]['members'][x]['assigned_patient'].unshift(patient);
                         teams[j]['count']++;
-                        teams[j].doctor.count++;
+                        teams[j].doctor.count = teams[j]['count'];
                         breakLine = true;
                         break;
                     }

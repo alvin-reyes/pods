@@ -125,15 +125,12 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
         }
         
         //  Get the priority doctors first (front-load)
-//        var doctorPriority = null;
-//        if(doctorArrDC.query().filter({patient_priority_fl:'Y'}).count() > 0) {
-//            doctorPriority = doctorArrDC.query().filter({patient_priority_fl:'Y'});
-//            doctorArrDC = doctorPriority;
-//        }
-//        console.log(doctorArrDC);
-//        console.log(doctorPriority);
-//        console.log(dataService.doctors);
-        
+        var doctorPriority = null;
+        if(doctorArrDC.query().filter({patient_priority_fl:'Y'}).count() > 0) {
+            doctorPriority = doctorArrDC.query().filter({patient_priority_fl:'Y'});
+            doctorArrDC = doctorPriority;
+        }
+
         //  get the doctor with the lowest number and return pod.
         var lowestNumberD = 9999;
         var docAssignment = '';
@@ -147,20 +144,22 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
         var assignedPods = [];
         for(var i=0;i<pods.length;i++) {
             if(pods[i].team_status == 'active' && pods[i].doctor.id == docAssignment.id) {
-                assignedPods.push({"pod":pods[i]});
+                assignedPods.push(pods[i]);
             }
         }
-        //  Get the lowest number of assigned patient of pod
-        var lowestNumberP = 9999;
-        var podAssignment = '';
-        for(var i=0;i<assignedPods.length;i++) {
-            console.log(assignedPods[i].pod.count);
-            if(lowestNumberP > assignedPods[i].pod.count) {
-                lowestNumberP = assignedPods[i].pod.count;
-                podAssignment = assignedPods[i];
-            }
-        }
-        return podAssignment;
+//        //  Get the lowest number of assigned patient of pod
+//        var lowestNumberP = 9999;
+//        var podAssignment = '';
+//        for(var i=0;i<assignedPods.length;i++) {
+//            console.log(assignedPods[i].pod.count);
+//            if(lowestNumberP > assignedPods[i].pod.count) {
+//                lowestNumberP = assignedPods[i].pod.count;
+//                podAssignment = assignedPods[i];
+//            }
+//        }
+        //  console.log(assignedPods);
+        return this.determinePatientAssignmentToPod(assignedPods);
+        //return podAssignment;
     }
     
     this.determinePatientAssignmentToPod = function(pods) {
@@ -169,6 +168,7 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
         for(var i=0;i<pods.length;i++) {
             var total = 0;
             var pod = pods[i];
+            console.log(pod);
             if(pod.team_status == 'active') {
                 for(var j=0;j<pods[i].members.length;j++) {
                     if(pods[i].members[j].member_status == 'active') {

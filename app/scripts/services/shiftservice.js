@@ -130,18 +130,33 @@ angular.module('erLoadUi')
     }
     
     this.shiftDoctor = function(pod,docTo) {
-        //  make sure to get the count of the doctor
-        var c = 0;
-        if(pod.doctor != null){
-            if(pod.doctor.count != undefined) {
-                c = pod.doctor.count;
-                //pod.doctor.count = 0;
+        //  make sure to get the count of the doctor of the pod.
+//        var c = 0;
+//        if(pod.doctor != null){
+//            if(pod.doctor.count != undefined) {
+//                c = pod.doctor.count;
+//                pod.doctor.patient_priority_fl = 'N';
+//            }
+//        }
+        docTo.patient_priority_fl = 'Y';
+//        docTo.count = c; // transfer the count of patients.
+        pod.doctor = docTo; // then replace.
+        this.reCountPodDocPat();
+        
+    }
+    
+    this.reCountPodDocPat = function() {
+        for(var i=0;i<dataService.teams.length;i++) {
+            if(dataService.teams[i].team_status == 'active'){
+                var numOfPatients = 0;
+                for(var j=0;j<dataService.teams[i].members.length;j++) {
+                    numOfPatients += dataService.teams[i].members[j].assigned_patient.length;
+                }
+            dataService.teams[i].count = parseInt(numOfPatients);
+            console.log(dataService.teams[i].doctor);
             }
         }
-        docTo.patient_priority_fl = 'Y';
-        docTo.count = c; // transfer the count of patients.
-        pod.doctor = docTo; // then replace.
-        
+        console.log(dataService.teams);
     }
     
     
