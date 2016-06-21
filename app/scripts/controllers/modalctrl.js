@@ -263,7 +263,7 @@ angular.module('erLoadUi')
 
 angular.module('erLoadUi')
     .controller('doctorswitchctrl',function
-     ($scope,$resource,$log,$timeout,$http,$uibModalInstance,team,doctor,dataService,notificationService,patientNurseAssignmentService) {
+     ($scope,$resource,$log,$timeout,$http,$uibModalInstance,team,doctor,shiftService,dataService,notificationService,patientNurseAssignmentService) {
     
     $scope.selectedDoctor = '';
     $scope.setDoctor = function(item) {
@@ -278,7 +278,7 @@ angular.module('erLoadUi')
         //  Switch to another doctor.
         for(var i=0;i<dataService.teams.length;i++) {
             if(dataService.teams[i].id == team.id) {
-                dataService.teams[i].doctor = $scope.selectedDoctor;
+                shiftService.shiftDoctor(dataService.teams[i],$scope.selectedDoctor);
                 break;
             }
         } 

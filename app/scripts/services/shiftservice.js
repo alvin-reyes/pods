@@ -124,22 +124,13 @@ angular.module('erLoadUi')
     }
     
     this.unShiftDoctor = function(doc) {
-        //  just reset the count of the doctor but not the pod.
         doc.count = 0;
         
     }
     
     this.shiftDoctor = function(pod,docTo) {
-        //  make sure to get the count of the doctor of the pod.
-//        var c = 0;
-//        if(pod.doctor != null){
-//            if(pod.doctor.count != undefined) {
-//                c = pod.doctor.count;
-//                pod.doctor.patient_priority_fl = 'N';
-//            }
-//        }
         docTo.patient_priority_fl = 'Y';
-//        docTo.count = c; // transfer the count of patients.
+        docTo.patient_priority_lm = 0;
         pod.doctor = docTo; // then replace.
         this.reCountPodDocPat();
         

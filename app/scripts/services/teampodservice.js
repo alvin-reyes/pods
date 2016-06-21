@@ -147,19 +147,8 @@ angular.module('erLoadUi').service('teamPodService', function(dataService){
                 assignedPods.push(pods[i]);
             }
         }
-//        //  Get the lowest number of assigned patient of pod
-//        var lowestNumberP = 9999;
-//        var podAssignment = '';
-//        for(var i=0;i<assignedPods.length;i++) {
-//            console.log(assignedPods[i].pod.count);
-//            if(lowestNumberP > assignedPods[i].pod.count) {
-//                lowestNumberP = assignedPods[i].pod.count;
-//                podAssignment = assignedPods[i];
-//            }
-//        }
-        //  console.log(assignedPods);
+        
         return this.determinePatientAssignmentToPod(assignedPods);
-        //return podAssignment;
     }
     
     this.determinePatientAssignmentToPod = function(pods) {
