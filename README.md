@@ -13,6 +13,9 @@ Run `grunt` for building and `grunt serve` for preview.
 
 Running `grunt test` will run the unit tests with karma.
 
+## Live Demo link
+[PodLogix](http://erload.technowebhub.com)
+
 ## Acknowledgements
 
 PodLogix was created by Alvin Reyes in May 2016.
